@@ -1,0 +1,7 @@
+[
+  { "id": 1, "text": "Learn HTML and CSS", "completed": true },
+  { "id": 2, "text": "Get good at JavaScript", "completed": true },
+  { "id": 3, "text": "Master React", "completed": false },
+  { "id": 4, "text": "Discover Redux", "completed": false },
+  { "id": 5, "text": "Build amazing apps", "completed": false }
+]
