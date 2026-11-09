@@ -1,4 +1,18 @@
+import { useDispatch } from "react-redux";
+
+import { createTask } from "../../redux/reducers.js";
+
 export const AddTask = () => {
+    const dispatch = useDispatch();
+
+    const onAdd = () => {
+        const value = document.getElementById("input-1").value;
+
+        if (value.length === 0) return;
+
+        dispatch(createTask(value));
+    };
+
     return (
         <div className="mt-4 flex gap-1">
             <input
@@ -9,7 +23,7 @@ export const AddTask = () => {
             />
             <button
                 type="button"
-                // onClick={onAdd}
+                onClick={onAdd}
                 className="h-[38px] cursor-pointer rounded-[3px] bg-[#e1e4e8] px-3 text-base text-[#333] hover:bg-[#d3d7dc]"
             >
                 Add task

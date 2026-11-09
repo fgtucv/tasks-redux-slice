@@ -11,6 +11,10 @@ const tasksSlice = createSlice({
         createTask: (state, action) => {
             const newId = current(state.tasks).at(-1) ? current(state.tasks).at(-1) + 1 : 1;
             
+            state.tasks = [
+                ...current(state.tasks),
+                { id: newId, text: action.payload, completed: false }
+            ]
         },
         changeCompeleted: (state, action) => {
             const oldTasks = current(state.tasks)
@@ -26,7 +30,9 @@ const tasksSlice = createSlice({
 
             state.tasks = newTasks
         },
-        changeStatus: (state, action) => { },
+        changeStatus: (state, action) => {
+            state.status = action.payload;
+        },
         deleteTask: (state, action) => {
             const newTasks = current(state.tasks).filter((t) => t.id !== action.payload);
 

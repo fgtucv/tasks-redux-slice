@@ -1,9 +1,16 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+
+import { changeStatus } from "../../redux/reducers.js";
 
 export const HeaderTask = () => {
-    const { tasks } = useSelector((state) => state.tasks);
+    const dispatch = useDispatch();
+    const { tasks, status } = useSelector((state) => state.tasks);
 
     const completedTasks = tasks.filter((t) => t.completed).length;
+
+    const onClick = (newStatus) => {
+        dispatch(changeStatus(newStatus))
+    };
 
     return (
         <header className="flex items-start justify-between">
@@ -18,25 +25,25 @@ export const HeaderTask = () => {
                 <div className="mt-1 flex gap-[3px]">
                     <button
                         type="button"
-                        // onClick={() => onClick("all")}
+                        onClick={() => onClick("all")}
                         className={`h-9 cursor-pointer rounded-[3px] px-3 text-base 
-                            "}`}
+                            ${status === "all" ? "text-white bg-[#1a73d9]" : "text-[#333] bg-[#e1e4e8]"}`}
                     >
                         All
                     </button>
                     <button
                         type="button"
-                        // onClick={() => onClick("active")}
+                        onClick={() => onClick("active")}
                         className={`h-9 cursor-pointer rounded-[3px] px-3 text-base 
-                            "}`}
+                            ${status === "active" ? "text-white bg-[#1a73d9]" : "text-[#333] bg-[#e1e4e8]"}`}
                     >
                         Active
                     </button>
                     <button
                         type="button"
-                        // onClick={() => onClick("completed")}
+                        onClick={() => onClick("completed")}
                         className={`h-9 cursor-pointer rounded-[3px] px-3 text-base
-                             "}`}
+                             ${status === "completed" ? "text-white bg-[#1a73d9]" : "text-[#333] bg-[#e1e4e8]"}`}
                     >
                         Completed
                     </button>
@@ -45,7 +52,3 @@ export const HeaderTask = () => {
         </header>
     )
 };
-
-// ${tasksType === "all" ? "text-white bg-[#1a73d9]" : "text-[#333] bg-[#e1e4e8]
-// ${tasksType === "completed" ? "text-white bg-[#1a73d9]" : "text-[#333] bg-[#e1e4e8]
-// ${tasksType === "active" ? "text-white bg-[#1a73d9]" : "text-[#333] bg-[#e1e4e8]
